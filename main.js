@@ -1,14 +1,17 @@
 const menuEmail = document.querySelector('.navbar-email');
 const menuHamIcon = document.querySelector('.menu');
+const productDetailCloseIcon = document.querySelector('.product-detail-close');
 const menuCarritoIcon = document.querySelector('.navbar-shopping-cart');
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu');
 const shoppingCartContainer = document.querySelector('#shoppingCartContainer');
+const productDetailContainer = document.querySelector('#productDetail');
 const cardsContainer = document.querySelector('.cards-container');
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 menuHamIcon.addEventListener('click', toggleMobileMenu);
 menuCarritoIcon.addEventListener('click', toggleCarritoAside);
+productDetailCloseIcon.addEventListener('click', closeProductDetailAside);
 
 function toggleDesktopMenu() {
     const isAsideClosed = shoppingCartContainer.classList.contains('inactive');
@@ -37,6 +40,16 @@ function toggleCarritoAside() {
     }
 
     shoppingCartContainer.classList.toggle('inactive');
+
+    
+}
+
+function openProductDetailAside() {
+    productDetailContainer.classList.remove('inactive');
+}
+
+function closeProductDetailAside() {
+    productDetailContainer.classList.add('inactive');
 }
 
 const productList = [];
@@ -78,6 +91,7 @@ function renderProducts(arr) {
         //product= {name, price,image}-> product.image
         const productImg = document.createElement('img');
         productImg.setAttribute('src', product.image);
+        productImg.addEventListener('click',openProductDetailAside);
     
         const productInfo= document.createElement('div');
         productInfo.classList.add('product-info');
@@ -87,14 +101,14 @@ function renderProducts(arr) {
         const productPrice = document.createElement('p');
         productPrice.innerText = '$' + product.price;
         const productName = document.createElement('p');
-        productPrice.innerText = '$' + product.name;
+        productName.innerText = product.name;
     
         productInfoDiv.appendChild(productPrice);
         productInfoDiv.appendChild(productName);
     
         const productInfoFigure = document.createElement('figure');
         const productImgCart = document.createElement('img');
-        productImgCart.setAttribute('src', './icons/bt_add_to_cart.svg')
+        productImgCart.setAttribute('src', './icons/bt_add_to_cart.svg');
       
         productInfoFigure.appendChild(productImgCart);
     
